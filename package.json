@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "build": "gulp build"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
