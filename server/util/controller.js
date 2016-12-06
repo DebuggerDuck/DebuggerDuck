@@ -108,12 +108,12 @@ module.exports = {
     //   text: text,
     //   }
     post: (req, res) => {
-             //console.log('Body?',req.body);
-        db.Order.findOneAndUpdate(
+
+      db.Order.findOneAndUpdate(
          {_id:req.body.data.volunteerId},
          {$push: { requests:{user_id: req.body.data.username, text:req.body.data.text} } }
-        )
-       .then((data) => {
+      )
+      .then((data) => {
         //console.log('Data sent to DB.', data);
         res.status(201).send(data);
       })

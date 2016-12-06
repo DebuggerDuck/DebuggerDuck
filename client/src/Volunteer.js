@@ -27,9 +27,9 @@ class Volunteer extends Component {
      //set the text back to '' and add the info to the requests array
     //Note: for some reason, .push wouldn't work and I had to use .concat
       //run postRequest to generate a new request.
-  onSubmit(){
-    console.log('Volunteer?', this.props.volunteer);
-    this.props.postRequest(this.state.username, this.props.volunteer._id, this.state.text);
+  onSubmit(text){
+    console.log('Text?', this.state.text);
+    this.props.postRequest(this.state.username, this.props.volunteer._id, text);
     this.setState({text:'', requests: this.state.requests.concat({username: this.state.username, picture: this.state.picture, text: this.state.text})});
   }
 
