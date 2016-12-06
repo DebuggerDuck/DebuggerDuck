@@ -16,7 +16,7 @@
 * {
 	font-family: 'Poppins', sans-serif;
 	background-color:#EFEFEF;
-	color:#808080;
+	color:#4F4D4D;
 	font-size:18px;
 }
 .nav-bar {
@@ -25,6 +25,7 @@
 	padding:10px;
 	color:white;
 	width:100%;
+	border-bottom:#808080 solid 1px;
 }
 
 .fb-button {
@@ -56,6 +57,7 @@
 	border-radius:8px;
 	padding:7px;
 	font-size:16px;
+	border:#808080 solid 1px;
 }
 .request-container {
 	padding:20px;
@@ -144,4 +146,42 @@
 .new-group {
 	margin-top:20px;
 	font-size:18px;
+}
+.volunteer-div {
+	position:relative;
+	margin-left:10vw;
+	margin-right:10vw;
+	background-color:#FFC78F;
+	text-align:left;
+	font-size:26px;
+	border-radius:15px;
+	border: #808080 solid 1px;
+	padding:3px;
+	margin-bottom:3vh;
+}
+.request-div {
+	background-color:#FFC78F;
+	text-align:left;
+	padding-left:15px;
+}
+.individual-request {
+	background-color:#FFC78F;
+	padding-left:60px;
+}
+
+.modal-inside{
+	background-color:#EFEFEF;
+	text-align:left;
+}
+.modal-input {
+	padding:3px;
+	margin-top:8px;
+	width:370px;
+}
+.second-input {
+	margin-left:94px;
+	margin-bottom:8px;
+}
+.third-input {
+	margin-bottom:8px;
 }

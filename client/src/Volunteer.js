@@ -34,19 +34,22 @@ class Volunteer extends Component {
   render() {
   	return ( 
       <div>
-        <img className='small-profile-pic' src={this.props.volunteer.picture}/>
-        {this.props.volunteer.name} is going to {this.props.volunteer.location} at {this.props.volunteer.time}.
+        <div className='volunteer-div'>
+          <img className='small-profile-pic' src={this.props.volunteer.picture}/>
+          {this.props.volunteer.name} is going to {this.props.volunteer.location} at {this.props.volunteer.time}.
+        
         {this.state.requests.map(request =>
           //this goes through the array of requests and maps them using the child component, Request.js
-                <Request 
-                //I threw math.random as the key because react kept getting angry at me for making duplicate keys??
-                key= {Math.random()}
-                request={request}/>
-              )}
-          <div>
-          What would you like {this.props.volunteer.name} to pick up for you? 
-          <input value={this.state.text} onChange={this.onTextChange.bind(this)} /> 
-          <button onClick={this.onSubmit.bind(this)} className="red-button">Send your requests</button>
+          <Request 
+          //I threw math.random as the key because react kept getting angry at me for making duplicate keys??
+            key= {Math.random()}
+            request={request}/>
+          )}
+          <div className='request-div'>
+            What would you like {this.props.volunteer.name} to pick up for you? 
+            <input value={this.state.text} onChange={this.onTextChange.bind(this)} /> 
+            <button onClick={this.onSubmit.bind(this)} className="red-button">Send your requests</button>
+        </div>
         </div>
      </div>
   );
