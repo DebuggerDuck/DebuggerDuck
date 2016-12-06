@@ -79,7 +79,7 @@ module.exports = {
     },
     // Volunteer controller functions for POST
     post: (req, res) => {
-      req.body.data = {
+      req.data = {
         username: 'wschwanke',
         location: 'Chipotle',
         time: 'Eleventee PM',
@@ -103,8 +103,10 @@ module.exports = {
   },
   request: {
     // Request controller functions for POST
+    //Data is posted in req.body
     post: (req, res) => {
-      console.log('Request POST');
+
+      console.log('Request POST', req);
       res.send(200);
     }
   }

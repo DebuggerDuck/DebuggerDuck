@@ -14,10 +14,16 @@ class VolunteerRequestContainer extends Component {
       username: this.props.username,
       picture: this.props.picture,
       //This is currently hardcoded in, but eventually we want to retrieve this info from the database.
-      volunteers:[{name: 'Dog', picture: 'http://mypetforumonline.com/wp-content/uploads/2014/09/8055895_orig.jpg', location: 'Chipotle', time:'3:00'}]
+      volunteers:this.props.currentData,
     };
-  }
 
+  }
+<<<<<<< 745f61fb551e2122ca2a0038287e80edc9c37d09
+
+=======
+  componentDidMount() { console.log('volunteers? ', this.state.volunteers);} 
+  
+>>>>>>> Making progress on route.
   render() {
     return ( 
      <div className='request-container'>
@@ -30,6 +36,7 @@ class VolunteerRequestContainer extends Component {
                 postRequest={this.props.postRequest}
                 key={Math.random()}
                 username={this.state.username}
+                //commenting out picture for now
                 picture={this.state.picture}
                 //This maps out the volunteers in the this.state.volunteers array into the child component, volunteer
                 volunteer={volunteer}/>
