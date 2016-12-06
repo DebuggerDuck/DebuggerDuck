@@ -86,7 +86,7 @@ module.exports = {
         groupId: 'f329j023dkwdk0w',
         requests: []
       }
-      new db.Order({
+      db.Order({
         order_user: req.body.data.username,
         location: req.body.data.location,
         time: req.body.data.time,
@@ -104,10 +104,27 @@ module.exports = {
   request: {
     // Request controller functions for POST
     //Data is posted in req.body
+    //postRequest sends
+    // {data:{ 
+    //   username: username,
+    //   volunteerId: volunteerId, 
+    //   text: text,
+    //   }
     post: (req, res) => {
 
-      console.log('Request POST', req);
-      res.send(200);
+        db.Order.findOneAndUpdate(
+         {id:req.body.data.volunteerId},
+         {$push: { requests:{user_id: req.body.data.username, text:req.body.data.text} } }
+        )
+       .then((data) => {
+        console.log('Data sent to DB.');
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.sendStatus(400)
+      })
+      //console.log('Request POST', req);
+     
     }
   }
 }
