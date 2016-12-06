@@ -28,7 +28,8 @@ class Volunteer extends Component {
     //Note: for some reason, .push wouldn't work and I had to use .concat
       //run postRequest to generate a new request.
   onSubmit(){
-    this.props.postRequest(this.state.username, this.props.volunteer, this.state.text);
+    console.log('Volunteer?', this.props.volunteer);
+    this.props.postRequest(this.state.username, this.props.volunteer._id, this.state.text);
     this.setState({text:'', requests: this.state.requests.concat({username: this.state.username, picture: this.state.picture, text: this.state.text})});
   }
 

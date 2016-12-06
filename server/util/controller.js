@@ -101,6 +101,12 @@ module.exports = {
   request: {
     // Request controller functions for POST
     //Data is posted in req.body
+    //postRequest sends
+    // {data:{ 
+    //   username: username,
+    //   volunteerId: volunteerId, 
+    //   text: text,
+    //   }
     post: (req, res) => {
              //console.log('Body?',req.body);
         db.Order.findOneAndUpdate(
@@ -115,6 +121,7 @@ module.exports = {
         res.sendStatus(400)
       })
       //console.log('Request POST', req);
+
     }
   }
 }
