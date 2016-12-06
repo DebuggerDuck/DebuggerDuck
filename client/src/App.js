@@ -151,12 +151,13 @@ class Runner extends Component {
   //     volunter == username of the volunteer,
   //     food is from input box
   //     All strings
-  postRequest(text) {
-    axios.post('/api/request', {data:{
-      //get userID somehow!!
-      userid: '12345',
-      text: text
-    }
+  postRequest(username, volunteerId, text) {
+      axios.post('/api/request', {data:{
+      //don't remove.  
+      username: username,
+      volunteerId: volunteerId, 
+      text: text,
+      }
     })
       .then(response => {
         console.log('Request submitted: ', response.data);

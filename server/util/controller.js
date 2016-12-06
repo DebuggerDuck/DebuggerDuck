@@ -81,6 +81,8 @@ module.exports = {
     },
     // Volunteer controller functions for POST
     post: (req, res) => {
+
+
       new db.Order({
         order_user: req.body.data.username,
         location: req.body.data.location,
@@ -99,15 +101,29 @@ module.exports = {
 
   request: {
     // Request controller functions for POST
+    //Data is posted in req.body
+    //postRequest sends
+    // {data:{ 
+    //   username: username,
+    //   volunteerId: volunteerId, 
+    //   text: text,
+    //   }
     post: (req, res) => {
-      console.log('Request POST');
-      res.sendStatus(200);
-    }
-  },
 
-  logout: {
-    get: (req, res) => {
-      res.sendStatus(200);
+
+      db.Order.findOneAndUpdate(
+         {_id:req.body.data.volunteerId},
+         {$push: { requests:{user_id: req.body.data.username, text:req.body.data.text} } }
+      )
+      .then((data) => {
+        //console.log('Data sent to DB.', data);
+        res.status(201).send(data);
+      })
+      .catch((err) => {
+        res.sendStatus(400)
+      })
+      //console.log('Request POST', req);
+
     }
   }
 }
