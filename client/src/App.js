@@ -152,11 +152,11 @@ class Runner extends Component {
   //     food is from input box
   //     All strings
   postRequest(text) {
-    axios.post('/api/request', {data:{
+      axios.post('/api/request', {data:{
       //get userID somehow!!
       userid: '12345',
       text: text
-    }
+      }
     })
       .then(response => {
         console.log('Request submitted: ', response.data);

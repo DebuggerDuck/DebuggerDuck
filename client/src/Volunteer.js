@@ -17,7 +17,7 @@ class Volunteer extends Component {
       text:'',
       //requests is an array of stuff obtained from the database. 
       //It can be added to by the user by typing into the inputs and submitting.
-      requests:[{username:'Cat', picture:'http://www.warrenphotographic.co.uk/photography/bigs/08482-Fluffy-ginger-female-kitten.jpg', text:'Pick me up a burrito'}]
+      requests:this.props.volunteer.requests,
     };
   }
   onTextChange(event) {
