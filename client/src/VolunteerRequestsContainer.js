@@ -18,12 +18,9 @@ class VolunteerRequestContainer extends Component {
     };
 
   }
-<<<<<<< 745f61fb551e2122ca2a0038287e80edc9c37d09
 
-=======
   componentDidMount() { console.log('volunteers? ', this.state.volunteers);} 
   
->>>>>>> Making progress on route.
   render() {
     return ( 
      <div className='request-container'>
