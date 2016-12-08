@@ -76,7 +76,7 @@ class VolunteerModal extends React.Component {
             </ModalHeader>
             <div className='modal-inside'>
               <div>
-                &nbsp; Where are you going? &nbsp;
+                &nbsp; Where are you going?? WE ARE CHANGING THIS &nbsp;
                 <input 
                 onChange={this.onLocationChange.bind(this)} 
                 className='modal-input' 

@@ -22,11 +22,16 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 //which will be set at req.user in route handlers after authentication
 //Make a strategy for FB authentication
 
-if (process.env.server) {
+if (!process.env.clientID) {
+  var credentials = require('./env/config.js')
+}
+var clientID = process.env.clientID || credentials.facebook.clientID
+var clientSecret = process.env.clientSecret || credentials.facebook.clientSecret
+var callbackURL = process.env.callbackURL || credentials.facebook.callbackURL
   passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
-    callbackURL: 'https://food-runner.herokuapp.com/facebook/oauth'
+    clientID: clientID,
+    clientSecret: clientSecret,
+    callbackURL: callbackURL
   },
   //facebook sends back tokens and profile
   function(accessToken, refreshToken, profile, done) {
@@ -49,35 +54,7 @@ if (process.env.server) {
       })
      return done(null, profile);
   }));
-} else {
-  passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
-    callbackURL: 'http://127.0.0.1:' + module.exports.NODEPORT + '/facebook/oauth'
-  },
-  //facebook sends back tokens and profile
-  function(accessToken, refreshToken, profile, done) {
-    db.User.findOne({fb_id: profile.id}).exec()
-      .then((data) => {
-        //console.log(data);
-        if(!data) {
-          new db.User({
-            username: profile.displayName,
-            fb_id: profile.id,
-            picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=normal',
-            groups: [{group_id: 2345}]
-          }).save()
-          .then((data) => {
 
-          })
-          .catch((err) => {
-            console.error(err);
-          })
-        }
-      })
-     return done(null, profile);
-  }));
-}
 
 //Serialize and deserialize users out of the session.
 passport.serializeUser(function(user, done) {

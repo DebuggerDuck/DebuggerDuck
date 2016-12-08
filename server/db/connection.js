@@ -1,9 +1,13 @@
 const mongoose = require ('mongoose');
-
+if (!process.env.dbUrl) {
+  dbUrl = require('../env/config.js').dbUrl
+} else {
+  dbUrl = process.env.dbUrl
+}
 //This must be called because mongoose's promises library is deprecated
 mongoose.Promise = global.Promise;
  
-const mongodbUri = 'mongodb://Robin:robin1@ds119588.mlab.com:19588/debuggerduck';
+const mongodbUri = `${dbUrl}`;
 mongoose.connect(mongodbUri);
 
 const conn = mongoose.connection;   

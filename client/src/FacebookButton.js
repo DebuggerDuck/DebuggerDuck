@@ -25,7 +25,7 @@ class FacebookButton extends Component {
            <a
              //onClick={this.props.login}
              className='fb-button'
-             href='/login'>
+             href='api/user/logout'>
              <i className="fa fa-facebook" aria-hidden="true"></i>&nbsp;Log out
            </a>
           )
@@ -34,7 +34,7 @@ class FacebookButton extends Component {
            <a 
              //onClick={this.props.logOut}
              className='fb-button'
-             href='/login'>
+             href='api/user/logout'>
              <i className="fa fa-facebook" aria-hidden="true"></i>&nbsp;Log out
            </a>
           )
