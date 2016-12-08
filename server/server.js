@@ -24,9 +24,9 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 
 if (process.env.server) {
   passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
-    callbackURL: 'https://food-runner.herokuapp.com/facebook/oauth'
+    clientID: require('./db/config.js').fbObj.clientID,
+    clientSecret: require('./db/config.js').fbObj.clientSecret,
+    callbackURL: 'http://localhost:4040/facebook/oauth'
   },
   //facebook sends back tokens and profile
   function(accessToken, refreshToken, profile, done) {
@@ -51,9 +51,9 @@ if (process.env.server) {
   }));
 } else {
   passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
-    callbackURL: 'http://127.0.0.1:' + module.exports.NODEPORT + '/facebook/oauth'
+    clientID: require('./db/config.js').fbObj.clientID,
+    clientSecret: require('./db/config.js').fbObj.clientSecret,
+    callbackURL: 'http://localhost:4040/facebook/oauth'
   },
   //facebook sends back tokens and profile
   function(accessToken, refreshToken, profile, done) {
