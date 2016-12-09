@@ -24,10 +24,12 @@ class VolunteerModal extends React.Component {
   }
   onLocationChange(event) {
     //every time the user types a new letter, the state is changed to the current input
+    console.log('-----event target value:', event.target.value)
     this.setState({location: event.target.value});
   }
-  
+/////////////// put socket connection here ////////////////////
   onSubmit (){
+
     this.props.postVolunteer(this.state.location, this.state.time, this.props.currentGroup);
     console.log("On submit at the modal level")
     this.props.onSubmit();
