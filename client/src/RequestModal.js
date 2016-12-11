@@ -21,15 +21,22 @@ class RequestModal extends React.Component {
     //every time the user types a new letter, the state is changed to the current input
     this.setState({text: event.target.value});
   }
-  
+
+  sendMessage (message){
+    socket.emit('order message', {orderNumber: this.props.orderNumber, message: message})
+  }
+
   onSubmit (){
     //Don't change this invocation.
     console.log('modal text?', this.state.text);
+    this.sendMessage(this.state.text)
+    this.props.changeRole('receiver')
     this.props.onSubmit(this.state.text);
-    this.setState({
-      isOpen: false,
-      text: ''
-    });
+    // this.setState({
+    //   isOpen: false,
+    //   text: ''
+    // });
+
   }
 
   openModal (){
@@ -56,6 +63,8 @@ class RequestModal extends React.Component {
       }
     };
     let {isOpen, isSubOpen} = this.state;
+
+    console.log("Request Modal Props", this.props)
     return (
         <div className='center orange'>
           <button className="red-button" onClick={this.openModal.bind(this)}>
@@ -65,14 +74,14 @@ class RequestModal extends React.Component {
           <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
             <ModalHeader >
               <ModalClose onClick={this.hideModal.bind(this)}/>
-              
+
             </ModalHeader>
             <div className='modal-inside'>
               <div>
                 &nbsp; What would you like? &nbsp;
-                <input onChange={this.onTextChange.bind(this)} 
-                className='modal-input third-input' 
-                type="text" 
+                <input onChange={this.onTextChange.bind(this)}
+                className='modal-input third-input'
+                type="text"
                 id="text"/>
               </div>
             </div>
