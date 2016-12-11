@@ -11,13 +11,13 @@ class Chat extends Component {
     $('#chatSubmit').click(()=>{
       let msg = $('#messageForm').val()
       socket.emit('chat', {message: username+": "+msg, orderId: orderId })
-      console.log("This is what was submitted and by whom: ", msg, username)
+      console.log("This is what was submitted as a message: ", msg)
       $('#messageForm').val('')
       return false;
     })
 
     socket.on('chat' + this.props.orderId, function(msg) {
-      // console.log("this is what a message looks like coming in: chat"+this.props.orderId, msg);
+      console.log("this is what a message looks like coming in:", msg);
       $('#messages').append($('<li class=chat-message>').text(msg))
     })
   }
