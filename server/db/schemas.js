@@ -1,4 +1,5 @@
 const mongoose = require ('mongoose');
+const shortid = require ('shortid');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
@@ -7,10 +8,11 @@ let db = {};
 
 const UserSchema = new Schema ({
 	//mongoose will automatically create a unique id, so no need to manually create one
-	username: String,
+	userName: String,
 	fb_id: String,
 	picture: String,
-	groups: [{group_id: String, karma: {type: Number, default:0}}]
+	phoneNumber: String,
+	groups: [{ type: String, ref: 'Group' }]
 });
 
 // let getNameFromFb = function(input){
@@ -23,31 +25,44 @@ const UserSchema = new Schema ({
 // }
 
 // UserSchema.pre('save', function(next) {
-//   let username = getNameFromFb(input);
-//   this.username = name;
+//   let userName = getNameFromFb(input);
+//   this.userName = name;
 //   let picture = getPicFromFb(input);
 //   this.picture = picture;
 //   next();
 // });
 
 const GroupSchema = new Schema ({
-	// Will automatically generate group id
-	name: String
+	_id: {
+    type: String,
+    'default': shortid.generate
+	},
+	name: String,
+	users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	messages: [{
+		userName: String,
+		user_id: String,
+		picture: String,
+		text: String,
+		createdAt: { type : Date, default: Date.now }
+	}]
 })
 
 const OrderSchema = new Schema ({
 	// Will automatically generate order id
-	order_user: String,
+	orderer_userName: String,
 	location: String,
 	time: String,
 	group_id: String,
+	active: Boolean,
 	picture: String,
-	requests: [{user_id: String, picture: String, text: String}],
+	requests: [{userName: String, user_id: String, picture: String, text: String}],
 	createdAt: { type : Date, default: Date.now }
 })
 
-db.User = mongoose.model('user', UserSchema);
-db.Group = mongoose.model('group', GroupSchema);
-db.Order = mongoose.model('order', OrderSchema);
+
+db.User = mongoose.model('User', UserSchema);
+db.Group = mongoose.model('Group', GroupSchema);
+db.Order = mongoose.model('Order', OrderSchema);
 
 module.exports = db;

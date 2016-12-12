@@ -1,9 +1,16 @@
-
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import FacebookButton from './FacebookButton.js'
+import axios from 'axios';
 
-
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter
+} from 'react-modal-bootstrap';
 
 class NavBar extends Component {
   constructor(props) {
@@ -11,10 +18,16 @@ class NavBar extends Component {
 
     this.state = {
       loggedIn: false,
-      //I have not yet done anything with the karma besides hard code it as 0 and display it.
-      //This needs to be worked on.
-      karma: 0
+      isOpen: false,
+      phoneEntry : '',
     };
+
+    this.login = this.login.bind(this);
+    this.logOut = this.logOut.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.onPhoneChange = this.onPhoneChange.bind(this);
+    this.submitPhoneNumber = this.submitPhoneNumber.bind(this);
   }
 
   //Note: Navbar does not rerender when the app renders. How can we change this??
@@ -24,27 +37,96 @@ class NavBar extends Component {
   
   //login and logOut invoke the functions passed from App.
   login() {
-  	this.setState({loggedIn: true});
+    this.setState({loggedIn: true});
     console.log('Logout triggered from Navbar');
     this.props.postLogin();
-	 }
+   }
   //logout updates local state and runs postLogout, inherited from App. 
   logOut() {
     this.setState({loggedIn: false})
     this.props.postLogout();
   }
-  render() { 
-  		return ( 
-    	<div className='nav-bar'>
-    		<FacebookButton 
-          logOut={this.logOut.bind(this)} 
-          loggedIn={this.state.loggedIn}/>
-    		<div className='karma'>Karma: {this.state.karma}</div>
-        <img className='nav-pic' src={this.props.picture}/>
-        <div className='username'>{this.props.username} </div>
-    	</div>
-  		);
-  	}
+  openModal() {
+    this.setState({
+      isOpen: true
+    });
+  };
+  hideModal() {
+    this.setState({
+      isOpen: false
+    });
+  };
+  onPhoneChange(event) {
+    this.setState({
+      phoneEntry: event.target.value,
+    })
+  }
+  submitPhoneNumber() {
+    this.hideModal();
+    axios.put('/api/user/' + this.props.user._id, {data:{"phoneNumber": this.state.phoneEntry}})
+      .then( response => {
+        
+      })
+      .catch(error => {
+        console.log('Error while adding phone number:', error);
+      });
+  }
+
+  render() {
+    var phoneRender;
+    if (this.props.user.phoneNumber) {
+      phoneRender = 'Text Number:' + this.props.user.phoneNumber
+    } else {
+      phoneRender = <small onClick={this.openModal}>Enter you phone number for text updates</small>
+    }
+
+    let subModalDialogStyles = {
+      base: {
+        bottom: -600,
+        transition: 'bottom 0.4s'
+      },
+      open: {
+        bottom: 0
+      }
+    };
+    let {isOpen, isSubOpen} = this.state;
+
+  return ( 
+    <div className='nav-bar'>
+      <a href="/"><img src="/logo.png" height="60" width="333" className="logo" /></a>
+      <FacebookButton 
+        logOut={this.logOut} 
+        loggedIn={this.state.loggedIn}/>
+      <img className='nav-pic' src={this.props.user.picture}/>
+      <div className='userName'>
+        <div>{this.props.user.userName}</div>
+        <div>{phoneRender}</div>
+      </div>
+
+      <Modal isOpen={isOpen} onRequestHide={this.hideModal}>
+            <ModalHeader >
+              <ModalClose onClick={this.hideModal}/>
+            </ModalHeader>
+            <div className='modal-inside'>
+              <div>
+              &nbsp; Where is your phone number? &nbsp;
+                <input
+                onChange={this.onPhoneChange}
+                className='modal-input'
+                type="text"
+                id="location" />
+              </div>
+            </div>
+            <ModalFooter>
+              <button className="red-button" onClick={this.submitPhoneNumber}>
+                Submit
+              </button>
+            </ModalFooter>
+          </Modal>
+
+  	</div>
+		);
+  }
 };
 
 

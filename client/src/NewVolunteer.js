@@ -18,16 +18,15 @@ class Volunteer extends Component {
   }
 
   render() {
-  	return ( 
+  	return (
       <div>
         <img className='small-profile-pic' src='http://mypetforumonline.com/wp-content/uploads/2014/09/8055895_orig.jpg'/>
-        Dog is going to Chipotle at 3:00.
         <Request />
         <RequestButton />
      </div>
   );
  }
- 
+
 };
 
 export default NewVolunteer;

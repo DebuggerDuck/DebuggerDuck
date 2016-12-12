@@ -57,7 +57,7 @@ class RequestModal extends React.Component {
         <div>
           Don't see any groups you like? Why not ...
           <button className="red-button" onClick={this.openModal.bind(this)}>
-            Create a new group
+            Create a New group!
           </button>
 
           <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>

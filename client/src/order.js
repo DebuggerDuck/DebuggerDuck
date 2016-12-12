@@ -5,24 +5,20 @@ import axios from 'axios';
 
 import Request from './Request.js';
 import RequestModal from './RequestModal.js';
-import BackButton from './BackButton.js';
-import SMSButton from './SMSButton.js';
 
-class Volunteer extends Component {
+class Order extends Component {
   constructor(props) {
-    var socket = io;
-    // io.createRoom('2233')
     super(props);
-    console.log('PROP', this.props.pickup)
     this.state = {
       //This info has been funneled down from volunteerRequestContainer, which was funneled down from app.js
+      username: this.props.pickup.order_user,
+      picture: this.props.pickup.picture,
       //we set text as '' because nothing has been entered yet.
       text:'',
       //requests is an array of stuff obtained from the database.
       //It can be added to by the user by typing into the inputs and submitting.
       requests:this.props.pickup.requests,
-      count:0,
-      volunteer: this.props.pickup.order_user
+      count:0
     };
 
     this.postRequest = this.postRequest.bind(this);
@@ -39,59 +35,40 @@ class Volunteer extends Component {
     //console.log('Text?', text, "volunteer id", this.props.volunteer._id);
     this.postRequest(this.props.pickup._id, text);
     this.setState({text:''});
+    this.props.getDataForRendering();
     // this.setState({requests:this.props.volunteer.requests})
   }
 
   postRequest(volunteerId, text) {
-    console.log('volunteer id', volunteerId, 'text', text)
-    axios.post('/api/request', {data:{
+      axios.post('/api/request', {data:{
+      //don't remove.
+      username: this.state.user.username,
       volunteerId: volunteerId,
-      user_id: this.props.user._id,
-      picture: this.props.user.picture,
-      userName: this.props.user.userName,
+      picture: this.state.user.picture,
       text: text,
+
       }
     })
       .then(response => {
         console.log('Request submitted: ', response.data);
-        this.setState({requests: response.data.requests});
+        console.log('USER', this.state)
       })
       .catch(error => {
         console.log('Error while submitting food request:', error);
       })
   }
 
-  sendSMS (){
-    //CASEY WRITE THE SMS FUNCTION HERE!!!!!!!!!!!
-  }
-  render() {
-    var renderTextButton;
-  if(this.state.volunteer === this.props.user.userName) {
-    renderTextButton = <SMSButton sendSMS={this.props.renderSmsButton} />
-  }
-   
 
+  render() {
+    console.log('pickup', this.props.pickup)
   	return (
-      <div>
-      <BackButton viewOrders={this.props.viewOrders}/>
-        <div className='volunteer-div'>
+        <div className='volunteer-div' onClick={() => this.props.selectThisOrder(this.props.pickup)}>
           <img className='small-profile-pic' src={this.props.pickup.picture}/>
           {this.props.pickup.orderer_userName} is going to {this.props.pickup.location} at {this.props.pickup.time}.
-
-        {this.state.requests.map(request =>
-          //this goes through the array of requests and maps them using the child component, Request.js
-          <Request
-          //I threw math.random as the key because react kept getting angry at me for making duplicate keys??
-            key= {Math.random()}
-            request={request}/>
-          )}
-           <RequestModal onSubmit={this.onSubmit.bind(this)}/>
-        </div>
-        {renderTextButton}
         </div>
   );
  }
 
 };
 
-export default Volunteer;
+export default Order;

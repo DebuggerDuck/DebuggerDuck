@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import {
   Modal,
@@ -17,6 +18,8 @@ class VolunteerModal extends React.Component {
       time: '',
       location: '',
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
   }
     onTimeChange(event) {
     //every time the user types a new letter, the state is changed to the current input
@@ -26,12 +29,32 @@ class VolunteerModal extends React.Component {
     //every time the user types a new letter, the state is changed to the current input
     this.setState({location: event.target.value});
   }
-  
+
+  //postVolunteer POSTS a new volunteer to the server.
+    //Accepts a location, a time, and group.  Pulls userName from state.
+  postVolunteer(location, time, group) {
+    axios.post('/api/volunteer', {data:{
+        orderer_userName: this.props.user.userName,
+        location: location,
+        time:  time,
+        picture: this.props.user.picture,
+        groupId: this.props.group._id,
+        requests: [],
+      }
+    })
+    .then(response => {
+      console.log('Volunteer posted! ',response);
+      // this.getCurrentData();
+      this.render();
+    })
+    .catch(error => {
+      console.log('Error while posting Volunteer: ',error);
+    });
+  }
+
   onSubmit (){
-    this.props.postVolunteer(this.state.location, this.state.time, this.props.currentGroup);
-    console.log("On submit at the modal level")
+    this.postVolunteer(this.state.location, this.state.time, this.props.currentGroup);
     this.props.onSubmit();
-    this.props.getDataForRendering();
     this.setState({
       isOpen: false,
       time: '',
@@ -72,28 +95,28 @@ class VolunteerModal extends React.Component {
           <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
             <ModalHeader >
               <ModalClose onClick={this.hideModal.bind(this)}/>
-              
+
             </ModalHeader>
             <div className='modal-inside'>
               <div>
                 &nbsp; Where are you going? &nbsp;
-                <input 
-                onChange={this.onLocationChange.bind(this)} 
-                className='modal-input' 
-                type="text" 
+                <input
+                onChange={this.onLocationChange.bind(this)}
+                className='modal-input'
+                type="text"
                 id="location"/>
               </div>
               <div>
                 &nbsp; What time? &nbsp;
-                <input 
-                onChange={this.onTimeChange.bind(this)} 
-                className='modal-input second-input' 
-                type="text" 
+                <input
+                onChange={this.onTimeChange.bind(this)}
+                className='modal-input second-input'
+                type="text"
                 id="time"/>
               </div>
             </div>
             <ModalFooter>
-              <button className="red-button" onClick={this.onSubmit.bind(this)}>
+              <button className="red-button" onClick={this.onSubmit}>
                 Submit
               </button>
             </ModalFooter>

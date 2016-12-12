@@ -1,199 +1,337 @@
 .nav-pic {
-	border:black solid 1px;
-	border-radius:50%;
-	width:60px;
-	height:60px;
-	float:right;
-	margin-right:20px;
+  border: black solid 1px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  float: right;
+  margin-right: 20px;
 }
+
 .small-profile-pic {
-	border:black solid 1px;
-	border-radius:50%;
-	width:60px;
-	height:60px;
-	margin:5px;
+  border: black solid 1px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin: 5px;
 }
+
 * {
-	font-family: 'Poppins', sans-serif;
-	background-color:#EFEFEF;
-	color:#4F4D4D;
-	font-size:18px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #EFEFEF;
+  /*coloatr: #4F4D4D;*/
+  font-size: 18px;
 }
+
 .nav-bar {
-	height:80px;
-	background-color:#CAEBF2;
-	padding:10px;
-	color:white;
-	width:100%;
-	border-bottom:#808080 solid 1px;
+  height: 80px;
+  color: #3B5998;
+  background-color: #CAEBF2;
+  padding: 10px;
+  /*color: white;*/
+  width: 100%;
+  border-bottom: #808080 solid 1px;
 }
 
 .fb-button {
-	position:relative;
-	float:right;
-	background-color:#3B5998;
-	color:white;
-	padding:7px;
-	height:40px;
-	margin-top:10px;
-	margin-right:15px;
-	border-radius:10px;
-	border:none;
+  position: relative;
+  float: right;
+  background-color: #3B5998;
+  color: white;
+  padding: 7px;
+  height: 40px;
+  margin-top: 10px;
+  margin-right: 15px;
+  border-radius: 10px;
+  border: none;
 }
 
 .fa {
-	margin:2px,1px,1px,1px;
-	margin-right:4px;
-	color:white;
-	background-color:#3B5998;
+  margin: 2px, 1px, 1px, 1px;
+  margin-right: 4px;
+  color: white;
+  background-color: #3B5998;
 }
 
 .red-button {
-	position:relative;
-	background-color:#ff3b3f;
-	color:white;
-	margin:8px;
-	border:none;
-	border-radius:8px;
-	padding:7px;
-	font-size:16px;
-	border:#808080 solid 1px;
+  position: relative;
+  background-color: #2615FE;
+  color: white;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 16px;
+  border: #808080 solid 1px;
 }
-.request-container {
-	padding:20px;
+
+.green-button {
+  background-color: #287E14;
+  position: relative;
+  color: white;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 16px;
+  border: #808080 solid 1px;
 }
+
 .karma {
- 	position:relative;
- 	height:40px;
- 	white-space:nowrap;
- 	float:right;
- 	padding:10px;
- 	margin-right:20px;
- 	margin-top:6px;
- 	background-color:#CAEBF2;
- 	max-height:70%;
+  position: relative;
+  height: 40px;
+  white-space: nowrap;
+  float: right;
+  padding: 10px;
+  margin-right: 20px;
+  margin-top: 6px;
+  background-color: #CAEBF2;
+  max-height: 70%;
 }
-.username {
-	position:relative;
- 	height:40px;
- 	float:right;
- 	padding:10px;
- 	margin-right:20px;
- 	background-color:#CAEBF2;
- 	max-height:70%;
- 	white-space:nowrap;
- 	margin-top:6px;
+
+.userName {
+  position: relative;
+  height: 40px;
+  float: right;
+  padding: 10px;
+  margin-right: 20px;
+  background-color: #CAEBF2;
+  max-height: 70%;
+  white-space: nowrap;
+  margin-top: 6px;
 }
+
+.userName div {
+  background-color: #CAEBF2;
+}
+
+.userName small {
+  background-color: #CAEBF2;
+  cursor: pointer;
+}
+
 .nav-bar-spacer {
-	width:200px;
+  width: 200px;
 }
+
 .welcome {
-	text-align:center;
-	font-size: 60px;
-	position: relative;
+  text-align: center;
+  font-size: 60px;
+  position: relative;
 }
 
 .tag-line {
-	text-align: center;
-	font-size:30px;
-	margin-top:10px;
-	margin-bottom:10px;
-	position: relative;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
 }
+
 .spacer {
-	height:25vh;
+  height: 25vh;
 }
-.fb-button-big{
-	position:relative;
-	text-align:center;
-	height:60px;
-	background-color:#3B5998;
-	color:white;
-	padding:8px;
-	margin-top:20px;
-	border-radius:10px;
-	border:none;
-	font-size:24px;
+
+.fb-button-big {
+  position: relative;
+  text-align: center;
+  height: 60px;
+  background-color: #3B5998;
+  color: white;
+  padding: 8px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 24px;
 }
+
 .center {
-	text-align:center;
+  text-align: center;
 }
+
 .greeting {
-	margin-top:10vh;
-	font-size:48px;
-	text-align:center;
+  margin-top: 10vh;
+  font-size: 48px;
+  text-align: center;
+  color: #287E14;
 }
+
 .group-select {
-	text-align:center;
-	padding:20px;
-	font-size:36px;
+  text-align: center;
+  padding: 20px;
+  font-size: 36px;
 }
+
 .group {
-	position:relative;
-	text-align:center;
+  position: relative;
+  text-align: center;
 }
 
 .group-button {
-	background-color:#ff3b3f;
-	border:1px #808080 solid;
-	color:white;
-	font-size:24px;
-	margin-top:-1px;
+  background-color: #ff3b3f;
+  border: 1px #808080 solid;
+  color: white;
+  font-size: 24px;
+  margin-top: -1px;
 }
 
 .new-group {
-	margin-top:35px;
-	font-size:24px;
+  margin-top: 35px;
+  font-size: 24px;
 }
+
 .volunteer-div {
-	position:relative;
-	margin-left:10vw;
-	margin-right:10vw;
-	background-color:#FFC78F;
-	text-align:left;
-	font-size:26px;
-	border-radius:15px;
-	border: #808080 solid 1px;
-	padding:3px;
-	margin-bottom:3vh;
+  position: relative;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  background-color: #FFC202;
+  text-align: left;
+  font-size: 16px;
+  border-radius: 15px;
+  border: #808080 solid 1px;
+  padding: 3px;
+  margin-bottom: 3vh;
 }
 
 .individual-request {
-	background-color:#FFC78F;
-	padding-left:60px;
+  background-color: #FFC78F;
+  padding-left: 60px;
 }
 
-.modal-inside{
-	background-color:#EFEFEF;
-	text-align:left;
+.modal-inside {
+  background-color: #EFEFEF;
+  text-align: left;
 }
+
 .modal-input {
-	padding:3px;
-	margin-top:8px;
-	width:370px;
+  padding: 3px;
+  margin-top: 8px;
+  width: 370px;
 }
+
 .second-input {
-	margin-left:94px;
-	margin-bottom:8px;
+  margin-left: 94px;
+  margin-bottom: 8px;
 }
+
 .third-input {
-	margin-bottom:8px;
+  margin-bottom: 8px;
 }
+
 .no-wrap {
-	white-space:nowrap;
+  white-space: nowrap;
 }
+
 .orange {
-	background-color:#FFC78F;
+  background-color: #FFC202;
 }
+
 .top-margin {
-	margin-top:20px;
+  margin-top: 20px;
 }
+
 .no-requests {
-	padding:10px;
-	margin:5px;
-	font-size:24px;
+  padding: 10px;
+  margin: 5px;
+  font-size: 24px;
 }
-.group-button:hover{
-transform: scale(1.1);
-opacity: 0.5;
+
+.group-button:hover {
+  transform: scale(1.1);
+  opacity: 0.5;
+}
+
+.logo {
+  background-color: #CAEBF2;
+}
+
+.chat {
+  width: 50%;
+}
+
+.pickups {
+  width: 50%;
+}
+
+.display {
+  display: flex;
+  width: 100%;
+}
+
+.request-container {
+  display: block;
+  padding: 20px;
+  margin: 0 auto 0 auto;
+  /*float: right;*/
+  white-space: nowrap;
+}
+
+.chatBox {
+  max-width: 50%;
+  display: block;
+  margin: 0 auto 0 auto;
+  background-color: grey;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.chatInput {
+  display: flex;
+  background: grey;
+}
+
+.chatInput button {
+  display: block;
+  /* width: 150px; */
+  width: 20%;
+}
+
+.chatInput input {
+  max-width: 100%;
+  width: 80%;
+  /* display: block; */
+}
+
+.inputBox {
+  display: flex;
+  width: 100%;
+}
+
+.inputBox .text {
+  width: 100%;
+}
+
+.message {
+  background: white;
+  margin: 0 0 5px 0;
+padding: 2px;
+}
+
+.messagesBox {
+  height: 94%;
+  height: 500px;
+  margin: 0 0 15px 0;
+  background: transparent;
+  padding: 0px !important;
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+.keyContainer {
+  padding: 1em 0;
+}
+
+.uniqueKey {
+  font-size: 1.5em;
+  color: #F91B25;
+}
+
+.yellow-font {
+  color: #FFC202;
+}
+
+.yellow-background {
+  background-color: #FFC202;
 }

@@ -9,12 +9,12 @@ import {
   ModalFooter
 } from 'react-modal-bootstrap';
 
-class RequestModal extends React.Component {
+class JoinGroupModal extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isOpen: false,
-      text:''
+      text:'',
     };
   }
   onTextChange(event) {
@@ -23,12 +23,11 @@ class RequestModal extends React.Component {
   }
   
   onSubmit (){
-    //Don't change this invocation.
-    this.props.onSubmit(this.state.text);
     this.setState({
-      isOpen: false,
-      text: ''
+      isOpen: false
     });
+    this.props.addUserToGroup(this.props.userId, this.state.text);
+    //this.props.postGroup(this.state.text);
   }
 
   openModal (){
@@ -56,9 +55,10 @@ class RequestModal extends React.Component {
     };
     let {isOpen, isSubOpen} = this.state;
     return (
-        <div className='center orange'>
+        <div>
+          Your friends already have a group? Why not...
           <button className="red-button" onClick={this.openModal.bind(this)}>
-            Make a request
+            Join an existing group
           </button>
 
           <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
@@ -68,11 +68,12 @@ class RequestModal extends React.Component {
             </ModalHeader>
             <div className='modal-inside'>
               <div>
-                &nbsp; What would you like? &nbsp;
-                <input onChange={this.onTextChange.bind(this)} 
+                &nbsp; Enter Group Key &nbsp;
+                <input 
+                onChange={this.onTextChange.bind(this)} 
                 className='modal-input third-input' 
                 type="text" 
-                id="text"/>
+                id="group-name"/>
               </div>
             </div>
             <ModalFooter>
@@ -86,4 +87,4 @@ class RequestModal extends React.Component {
   }
 }
 
-export default RequestModal;
+export default JoinGroupModal;
