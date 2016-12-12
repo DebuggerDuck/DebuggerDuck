@@ -16,20 +16,28 @@ class RequestModal extends React.Component {
       isOpen: false,
       text:''
     };
+    this.orderId = this.props.orderId
   }
   onTextChange(event) {
-    //every time the user types a new letter, the state is changed to the current input
     this.setState({text: event.target.value});
   }
-  
+
+  sendMessage (orderId, message){
+    console.log('order being emittedd: ', orderId, " MEsssage: ", message)
+    socket.emit('order', {orderId: orderId, message: message})
+  }
+
   onSubmit (){
     //Don't change this invocation.
-    console.log('modal text?', this.state.text);
+    // console.log('modal text?', this.state.text);
+    this.sendMessage(this.orderId, this.state.text)
+    this.props.changeRole('receiver')
     this.props.onSubmit(this.state.text);
-    this.setState({
-      isOpen: false,
-      text: ''
-    });
+    // this.setState({
+    //   isOpen: false,
+    //   text: ''
+    // });
+
   }
 
   openModal (){
@@ -56,6 +64,8 @@ class RequestModal extends React.Component {
       }
     };
     let {isOpen, isSubOpen} = this.state;
+
+    // console.log("Request Modal Props", this.props)
     return (
         <div className='center orange'>
           <button className="red-button" onClick={this.openModal.bind(this)}>
@@ -65,14 +75,14 @@ class RequestModal extends React.Component {
           <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
             <ModalHeader >
               <ModalClose onClick={this.hideModal.bind(this)}/>
-              
+
             </ModalHeader>
             <div className='modal-inside'>
               <div>
                 &nbsp; What would you like? &nbsp;
-                <input onChange={this.onTextChange.bind(this)} 
-                className='modal-input third-input' 
-                type="text" 
+                <input onChange={this.onTextChange.bind(this)}
+                className='modal-input third-input'
+                type="text"
                 id="text"/>
               </div>
             </div>
