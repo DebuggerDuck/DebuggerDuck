@@ -1,5 +1,12 @@
+'use strict';
 const path = require('path');
 const express = require('express');
+const app = express();
+
+let NODEPORT = process.env.PORT || 4040
+
+
+const server = app.listen(NODEPORT);
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const router = require('./util/router.js');
@@ -8,10 +15,16 @@ const dbConnection = require('./db/connection.js');
 const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
+const io = require('socket.io').listen(server);
+
+require('dotenv').config({silent: true});
 
 // Use express and export it
-const app = express();
+
 module.exports.app = app;
+
+
+
 
 // Check to see if there is a port environment variable or just use port 4040 instead
 module.exports.NODEPORT = process.env.PORT || 4040;
@@ -24,9 +37,9 @@ module.exports.NODEPORT = process.env.PORT || 4040;
 
 if (process.env.server) {
   passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
-    callbackURL: 'https://food-runner.herokuapp.com/facebook/oauth'
+    clientID: process.env.FB_ID,
+    clientSecret: process.env.FB_SECRET,
+    callbackURL: 'https://foodrunnerapp.herokuapp.com/facebook/oauth'
   },
   //facebook sends back tokens and profile
   function(accessToken, refreshToken, profile, done) {
@@ -51,8 +64,8 @@ if (process.env.server) {
   }));
 } else {
   passport.use(new Strategy({
-    clientID: '361835207541944',
-    clientSecret: 'ca1b1d29b3c119872740b588527bd6fb',
+    clientID: process.env.FB_ID,
+    clientSecret: process.env.FB_SECRET,
     callbackURL: 'http://127.0.0.1:' + module.exports.NODEPORT + '/facebook/oauth'
   },
   //facebook sends back tokens and profile
@@ -112,12 +125,12 @@ app.use(passport.session());
 //     randomNumber=randomNumber.substring(2,randomNumber.length);
 //     res.cookie('cookieName',randomNumber, { maxAge: 900000, httpOnly: true });
 //     console.log('cookie created successfully');
-//   } 
+//   }
 //   else
 //   {
-//     // yes, cookie was already present 
+//     // yes, cookie was already present
 //     console.log('cookie exists', cookie);
-//   } 
+//   }
 //   next();
 // });
 
@@ -136,17 +149,34 @@ app.get('/facebook/oauth', passport.authenticate('facebook', {failureRedirect: '
       session: req.sessionID,
       userID: req.user.id
     }
-    res.cookie('fr-session', cookie, { maxAge: 900000, httpOnly: true }).redirect('/');
+    res.cookie('fr-session', cookie, { maxAge: 90, httpOnly: true }).redirect('/');
 });
 
 // Listen for requests on /api and then use the router to determine
 // what happens with the requests
 app.use('/api', router);
 
-// Start the actual server listening on the port variable
-app.listen(module.exports.NODEPORT, function (err) {
-  // If there is an error log it
-  if (err) { console.error(err); }
-  // If there is not an error console log what port the server is running on
-  else { console.log('Server running on port %s', module.exports.NODEPORT) }
+//Adding socket controller
+io.on('connection', function(socket){
+  socket.broadcast.emit('user connected')
+  socket.on('chat', function(data){
+    console.log("chat received", data)
+    io.emit('chat'+data.orderId, data.message);
+  });
+  socket.on('status', function(data){
+    console.log("status updated", data)
+    io.emit('status'+data.orderId, data.status);
+  });
+  socket.on('order message', function(data){
+    io.emit('order'+data.orderNumber, data.message);
+  })
 })
+
+
+// Start the actual server listening on the port variable
+// app.listen(module.exports.NODEPORT, function (err) {
+//   // If there is an error log it
+//   if (err) { console.error(err); }
+//   // If there is not an error console log what port the server is running on
+//   else { console.log('Server running on port %s', module.exports.NODEPORT) }
+// })

@@ -1,3 +1,83 @@
+
+.progress-container {
+  width: 500px;
+  margin: 0 auto;
+  background: #FFC78F !important;
+}
+
+.progress-meter {
+  background-color:#FFC78F;
+  padding: 0;
+}
+
+ol.progress-meter {
+  padding-bottom: 9.5px;
+  list-style-type: none;
+  background-color:#FFC78F;
+
+}
+ol.progress-meter li {
+  background-color:#FFC78F;
+  font-family: 'Poppins', sans-serif;
+  display: inline-block;
+  text-align: center;
+  text-indent: -19px;
+  height: 36px;
+  width: 24.99%;
+  font-size: 12px;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+}
+ol.progress-meter li:before {
+  position: relative;
+  float: left;
+  text-indent: 0;
+  left: -webkit-calc(50% - 9.5px);
+  left: -moz-calc(50% - 9.5px);
+  left: -ms-calc(50% - 9.5px);
+  left: -o-calc(50% - 9.5px);
+  left: calc(50% - 9.5px);
+}
+ol.progress-meter li.done {
+  background-color:#FFC78F;
+  font-size: 12px;
+}
+ol.progress-meter li.done:before {
+  content: "\2713";
+  height: 19px;
+  width: 19px;
+  line-height: 21.85px;
+  bottom: -28.175px;
+  border: none;
+  border-radius: 19px;
+}
+ol.progress-meter li.todo {
+  background-color:#FFC78F;
+  font-size: 12px;
+}
+ol.progress-meter li.todo:before {
+  content: "\2B24";
+  font-size: 17.1px;
+  bottom: -26.95px;
+  line-height: 18.05px;
+}
+ol.progress-meter li.done {
+  color: black;
+  border-bottom-color: yellowgreen;
+}
+ol.progress-meter li.done:before {
+  color: white;
+  background-color: yellowgreen;
+}
+ol.progress-meter li.todo {
+  background-color:#FFC78F;
+  color: silver;
+  border-bottom-color: silver;
+}
+ol.progress-meter li.todo:before {
+  color: silver;
+}
+
 .nav-pic {
 	border:black solid 1px;
 	border-radius:50%;
@@ -15,10 +95,13 @@
 }
 * {
 	font-family: 'Poppins', sans-serif;
-	background-color:#EFEFEF;
 	color:#4F4D4D;
 	font-size:18px;
 }
+body {
+	background-color: #efefef
+}
+
 .nav-bar {
 	height:80px;
 	background-color:#CAEBF2;
@@ -40,7 +123,9 @@
 	border-radius:10px;
 	border:none;
 }
-
+.fb-button:hover{
+	color:white;
+}
 .fa {
 	margin:2px,1px,1px,1px;
 	margin-right:4px;
@@ -115,6 +200,13 @@
 	border:none;
 	font-size:24px;
 }
+.fb-button-big:hover,
+.fb-button-big:active,
+.fb-button-big:visited{
+	text-decoration: none;
+	color:white;
+	cursor: pointer;
+}
 .center {
 	text-align:center;
 }
@@ -164,7 +256,6 @@
 }
 
 .modal-inside{
-	background-color:#EFEFEF;
 	text-align:left;
 }
 .modal-input {
@@ -196,4 +287,66 @@
 .group-button:hover{
 transform: scale(1.1);
 opacity: 0.5;
+}
+
+.chat-window{
+	height:200px;
+	border-radius: 20px;
+	border:1px solid black;
+	background: rgba(255,255,255,.75);
+	overflow:auto;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.chat-form{
+	position: inherit;
+	display: inline-block;
+	float: left;
+	margin-right: 20%;
+	bottom: 0
+}
+
+#messageForm{
+	border-radius: 5px;
+}
+
+#chat-submit,
+.chat-button{
+	background: #CAEBF2;
+	border-radius: 5px;
+}
+
+.chat-messages{
+	list-style-type: none
+}
+
+.chat-message{
+	background: rgba();
+}
+
+.progress-div{
+	background-color:#FFC78F;
+}
+
+.button-group{
+	display:inline-block;
+	position: relative;
+}
+.btn-group button{
+	border-radius: 10px;
+	background: rgba(202, 235, 242,.75)
+}
+
+.exit{
+  margin: 5px;
+  color: #FFC78F;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: #ff3b3f;
+  position: absolute;
+  top:0;
+  right:0;
+  display: inline-block;
 }

@@ -22,6 +22,11 @@ coverage
 build/
 dist/
 
+# Environment Variables
+.env
+
+# Mac Folder Stuff
+.DS_Store
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
