@@ -1,4 +1,7 @@
+'use strict';
 const db = require('../db/schemas.js');
+
+require('dotenv').config({silent: true});
 
 // Returns an object with a key of data
 const buildResObj = function (data) {
@@ -11,6 +14,7 @@ module.exports = {
 
   user: {
     get: (req, res) => {
+      console.log("----------req.user: ",req.user)
       db.User.findOne({fb_id: req.user.id}).exec()
         .then((user) => {
           res.status(200).send(user);
@@ -26,6 +30,7 @@ module.exports = {
       } else {
         res.send(false);
       }
+
     },
     logout: (req, res) => {
       req.session.destroy();
@@ -97,7 +102,8 @@ module.exports = {
         time: req.body.data.time,
         picture: req.body.data.picture,
         group_id: req.body.data.groupId,
-        requests: req.body.data.requests
+        requests: req.body.data.requests,
+        orderNumber: req.body.data.orderNumber
       }).save()
       .then((data) => {
         res.status(201).send(data);
@@ -114,7 +120,7 @@ module.exports = {
     post: (req, res) => {
 
       db.Order.findOneAndUpdate(
-         {_id:req.body.data.volunteerId},
+         {orderNumber:req.body.data.orderId},
          {$push: { requests:{user_id: req.body.data.username, picture: req.body.data.picture, text:req.body.data.text} } }
         )
       .then((data) => {
@@ -127,13 +133,13 @@ module.exports = {
       //console.log('Request POST', req);
 
    }
-}, 
+},
 
   logout: {
     get: (req, res) => {
-      res.sendStatus(200); 
+      res.sendStatus(200);
 
      }
-   },  
-  
-}  
+   },
+
+}

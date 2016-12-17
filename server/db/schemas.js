@@ -1,3 +1,4 @@
+'use strict';
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
@@ -43,7 +44,8 @@ const OrderSchema = new Schema ({
 	group_id: String,
 	picture: String,
 	requests: [{user_id: String, picture: String, text: String}],
-	createdAt: { type : Date, default: Date.now }
+	createdAt: { type : Date, default: Date.now },
+	orderNumber:String
 })
 
 db.User = mongoose.model('user', UserSchema);
